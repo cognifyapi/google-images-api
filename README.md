@@ -1,11 +1,12 @@
-# CognifyApi Google Images API - Implementation Guide 🚀
+# Google Images API by CognifyApi - Implementation Guide 🚀
 
 This repository provides a quick-start guide and documentation for implementing the **Google Images Search API** via [Cognify API](https://cognifyapi.com). This API allows developers to programmatically fetch high-quality image results from Google's index.
 
 ---
 
 ## 🔗 Official Resources
-- **API Documentation:** [Cognify API Google Images Docs](https://cognifyapi.com/docs/google-images-docs)
+- **API Documentation:** [Google Images API Docs](https://cognifyapi.com/docs/google-images-docs)
+- **More Info:** [Google Images API](https://cognifyapi.com/google-images)
 - **Official Website:** [CognifyAPI.com](https://cognifyapi.com/)
 - **Provider Platform:** [RapidAPI Link](https://rapidapi.com/johnjames28/api/google-images4)
 
