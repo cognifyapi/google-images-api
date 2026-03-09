@@ -8,7 +8,7 @@ This repository provides a quick-start guide and documentation for implementing 
 - **API Documentation:** [Google Images API Docs](https://cognifyapi.com/docs/google-images-docs)
 - **More Info:** [Google Images API](https://cognifyapi.com/google-images)
 - **Official Website:** [CognifyAPI.com](https://cognifyapi.com/)
-- **Provider Platform:** [RapidAPI Link](https://rapidapi.com/johnjames28/api/google-images4)
+- **Provider Platform:** [Google Images Api from RapidAPI Link](https://rapidapi.com/johnjames28/api/google-images4)
 
 ---
 
