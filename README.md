@@ -1,8 +1,11 @@
 # Google Images API by CognifyApi - Implementation Guide 🚀
 
 This repository provides a quick-start guide and documentation for implementing the **Google Images Search API** via [Cognify API](https://cognifyapi.com). This API allows developers to programmatically fetch high-quality image results from Google's index.
+A high-performance Google Images API for Python. Scrape images to JSON at scale. No credit card required. $0.003 per 1k requests.
 
 ---
+
+## Scraping Google Images to JSON
 
 ## 🔗 Official Resources
 - **API Documentation:** [Google Images API Docs](https://cognifyapi.com/docs/google-images-docs)
