@@ -1,7 +1,7 @@
 # Google Images Search API by CognifyApi - Implementation Guide 🚀
 
 This repository provides a quick-start guide and documentation for implementing the **Google Images Search API** via [Cognify API](https://cognifyapi.com). This API allows developers to programmatically fetch high-quality image results from Google's index.
-A high-performance Google Images API. Free trial No credit card required.
+A high-performance Google Images API.
 #### Free trial No credit card required.
 
 ---
