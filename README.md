@@ -3,7 +3,7 @@
 This repository provides a quick-start guide and documentation for implementing the **Google Images Search API** via [Cognify API](https://cognifyapi.com). This API allows developers to programmatically fetch high-quality image results from Google's index.
 A high-performance Google Images API.
 #### Free trial No credit card required.
-[![Start Now](https://img.shields.io/badge/Start%20Now%20-🚀-blue?style=for-the-badge&logo=google-cloud)](https://cognifyapi.com/google-images)
+[![Start Now](https://img.shields.io/badge/Start%20Now%20-🚀-blue?style=for-the-badge&logo=google-cloud)](https://cognifyapi.com/google-images?utm_source=github&utm_medium=repo&utm_campaign=google_images_api&utm_content=cta)
 
 ---
 
