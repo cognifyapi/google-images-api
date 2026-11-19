@@ -1,65 +1,62 @@
-const axios = require('axios');
-// 1. Configuration
-const API_KEY = 'YOUR_RAPIDAPI_KEY_HERE'; // Get this from RapidAPI
-const QUERY = 'Blue Ocean';
+const axios = require("axios");
 
-// 2. Execution Get Images with imageInfo
-const optionsOne = {
-  method: 'GET',
-  url: 'https://google-images4.p.rapidapi.com/getGoogleImages',
-  params: {
-    query: QUERY,
-    count: '5',       // Number of images
-    imageInfo: 'true' // Returns size and type
-  },
-  headers: {
-    'X-RapidAPI-Key': API_KEY,
-    'X-RapidAPI-Host': 'google-images4.p.rapidapi.com'
-  }
-};
+const API_KEY = process.env.COGNIFY_API_KEY;
+const API_URL = "https://api.cognifyapi.com/google-images";
+const QUERY = "tesla";
 
-async function getImagesImageInfo() {
-  try {
-    console.log(`Searching for: ${QUERY}...`);
-    const response = await axios.request(optionsOne);
-    
-    // Log the first image URL found
-    const firstImage = response.data.images[0];
-    console.log('Success! Found image:', firstImage.url);
-    
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
+if (!API_KEY) {
+  throw new Error("Set the COGNIFY_API_KEY environment variable before running this example.");
 }
 
-// 3. Execution Get Images
-
-const optionsTwo = {
-  method: 'GET',
-  url: 'https://google-images4.p.rapidapi.com/getGoogleImages',
-  params: {
+async function getImages(includeMetadata) {
+  const params = {
     query: QUERY,
-    count: '5',       // Number of images
-  },
-  headers: {
-    'X-RapidAPI-Key': API_KEY,
-    'X-RapidAPI-Host': 'google-images4.p.rapidapi.com'
-  }
-};
+    count: 5,
+  };
 
-async function getImages() {
-  try {
-    console.log(`Searching for: ${QUERY}...`);
-    const response = await axios.request(optionsTwo);
-    
-    // Log the first image URL found
-    const firstImageUrl = response.data.images[0];
-    console.log('Success! Found image:', firstImageUrl);
-    
-  } catch (error) {
-    console.error('Error:', error.message);
+  if (includeMetadata) {
+    params.imageInfo = true;
   }
+
+  const response = await axios.get(API_URL, {
+    params,
+    headers: {
+      "x-cognifyapi-key": API_KEY,
+    },
+  });
+
+  const images = response.data.images;
+  if (!Array.isArray(images)) {
+    throw new Error("The API response did not contain an images array.");
+  }
+
+  if (images.length === 0) {
+    console.log("No images found.");
+    return;
+  }
+
+  const firstImage = images[0];
+  const firstImageUrl =
+    typeof firstImage === "string" ? firstImage : firstImage?.url;
+  if (typeof firstImageUrl !== "string") {
+    throw new Error("The first image result did not contain a URL.");
+  }
+
+  console.log(
+    `Success! First image${includeMetadata ? " with metadata" : ""}:`,
+    firstImageUrl
+  );
 }
 
-getImagesImageInfo();
-getImages();
+async function main() {
+  await getImages(true);
+  await getImages(false);
+}
+
+main().catch((error) => {
+  console.error(
+    "Google Images request failed:",
+    error.response?.data || error.message
+  );
+  process.exitCode = 1;
+});
