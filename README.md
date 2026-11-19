@@ -1,9 +1,11 @@
-# Google Images Search API by CognifyApi - Implementation Guide 🚀
+# Google Images Search API by CognifyAPI - Implementation Guide 🚀
 
-This repository provides a quick-start guide and documentation for implementing the **Google Images Search API** via [Cognify API](https://cognifyapi.com). This API allows developers to programmatically fetch high-quality image results from Google's index.
-A high-performance Google Images API.
-#### Free trial No credit card required.
-[![Start Now](https://img.shields.io/badge/Start%20Now%20-🚀-blue?style=for-the-badge&logo=google-cloud)](https://cognifyapi.com/google-images?utm_source=github&utm_medium=repo&utm_campaign=google_images_api&utm_content=cta)
+This guide provides a quick start for implementing the **Google Images Search API** via [CognifyAPI](https://cognifyapi.com). Search Google Images programmatically and receive structured image results as JSON.
+
+A high-performance Google Images API.  
+#### Free trial. No credit card required.
+
+[![Start Now](https://img.shields.io/badge/Start%20Now-🚀-blue?style=for-the-badge&logo=google-cloud)](https://cognifyapi.com/google-images?utm_source=github&utm_medium=repo&utm_campaign=google_images_api&utm_content=cta)
 
 ---
 
@@ -13,115 +15,101 @@ A high-performance Google Images API.
 - **API Documentation:** [Google Images API Docs](https://cognifyapi.com/docs/google-images-docs)
 - **More Info:** [Google Images API](https://cognifyapi.com/google-images)
 - **Official Website:** [CognifyAPI.com](https://cognifyapi.com/)
-- **Provider Platform (RapidApi):** [Google Images Api](https://rapidapi.com/johnjames28/api/google-images4)
+- **CognifyAPI Studio:** [Get an API key](https://studio.cognifyapi.com/)
+- **Source Repository:** [Google Images API on GitHub](https://github.com/cognifyapi/google-images-api)
 
 ---
 
 ## 🛠 Features
-- **Massive Database:** Access Google's vast image repository.
-- **Advanced Metadata:** Get image dimensions (width/height) and MIME types.
-- **Auto-Complete:** Access Google search suggestions alongside image results.
-- **Scalable:** Built on high-performance infrastructure for production apps.
+- **Google Images Search:** Search for images using a query.
+- **Image Metadata:** Optionally include image dimensions, file type, and MIME type.
+- **Structured JSON:** Integrate image results into applications and data workflows.
+- **Scalable API:** Use the same endpoint for development and production workloads.
 
 ## 🚀 Getting Started
 
 ### Base URL
-`https://google-images4.p.rapidapi.com`
 
-**Parameters:**
+`https://api.cognifyapi.com`
+
+### Authentication
+
+Include your CognifyAPI key in the `x-cognifyapi-key` request header:
+
+```text
+x-cognifyapi-key: YOUR_COGNIFY_API_KEY
+```
+
+### Parameters
+
 | Parameter | Required | Description |
 | :--- | :--- | :--- |
-| `query` | Yes | Search keyword (e.g., "SpaceX") |
-| `count` | No | Number of results (Default: 100) |
-| `imageInfo`| No | Set to `true` to return width, height, and mime type. |
+| `query` | Yes | Search keyword (for example, `electric cars`). |
+| `count` | No | Number of image results to return. |
+| `imageInfo` | No | Set to `true` to include width, height, file type, and MIME type. |
 
-### 1. Fetch Images with all parameters (`/getGoogleImages`)
-Retrieve images based on a search keyword with all parameters included.
+### Search for Images with Metadata
+
+The `imageInfo=true` parameter includes image dimensions and format metadata.
 
 **Example Request (Node.js/Axios):**
+
 ```javascript
-const axios = require('axios');
+const axios = require("axios");
 
-const options = {
-  method: 'GET',
-  url: 'https://google-images4.p.rapidapi.com/getGoogleImages',
-  params: {query: 'SpaceX', count: '5', imageInfo: 'true'},
-  headers: {
-    'X-RapidAPI-Key': 'YOUR_API_KEY',
-    'X-RapidAPI-Host': 'google-images4.p.rapidapi.com'
-  }
-};
+async function searchImages() {
+  try {
+    const response = await axios.get(
+      "https://api.cognifyapi.com/google-images",
+      {
+        params: {
+          query: "electric cars",
+          count: 10,
+          imageInfo: true,
+        },
+        headers: {
+          "x-cognifyapi-key": "YOUR_COGNIFY_API_KEY",
+        },
+      }
+    );
 
-axios.request(options).then(response => {
     console.log(response.data);
-}).catch(error => {
-    console.error(error);
-});
+  } catch (error) {
+    console.error(error.response?.data || error.message);
+  }
+}
+
+searchImages();
 ```
-**Example Response (Node.js/Axios):**
+
+**Example Response:**
+
 ```json
 {
-    "status": "success",
-    "query": "SpaceX",
-    "results": 2,
-    "images": [
-        {
-            "url": "https://example.com/image.jpg",
-            "width": 1920,
-            "height": 1080,
-            "type": "jpg",
-            "mime": "image/jpg"
-        },
-        {
-            "url": "https://example.com/image.jpg",
-            "width": 1920,
-            "height": 1080,
-            "type": "jpg",
-            "mime": "image/jpg"
-        }
-    ]
+  "status": "success",
+  "query": "electric cars",
+  "results": 1,
+  "images": [
+    {
+      "url": "https://images.squarespace-cdn.com/content/v1/6151d38ea56f9d31cf76ec07/5c36bef0-361b-43f4-8bb0-c0cdb49d98e4/688005_20250225_Polestar_4_Long_range_Single_motor_in_Electron.jpg",
+      "width": 2500,
+      "height": 1667,
+      "type": "jpg",
+      "mime": "image/jpeg"
+    }
+  ]
 }
 ```
 
-### 2. Fetch Images without imageInfo parameter (`/getGoogleImages`)
-Retrieve images based on a search keyword.
+### Search for Images without Metadata
 
-**Example Request (Node.js/Axios):**
-```javascript
-const axios = require('axios');
+Omit `imageInfo` when image dimensions and format metadata are not needed.
 
-const options = {
-  method: 'GET',
-  url: 'https://google-images4.p.rapidapi.com/getGoogleImages',
-  params: {query: 'SpaceX', count: '5'},
-  headers: {
-    'X-RapidAPI-Key': 'YOUR_API_KEY',
-    'X-RapidAPI-Host': 'google-images4.p.rapidapi.com'
-  }
-};
+**Example Request (cURL):**
 
-axios.request(options).then(response => {
-    console.log(response.data);
-}).catch(error => {
-    console.error(error);
-});
+```bash
+curl --get 'https://api.cognifyapi.com/google-images' \
+  --data-urlencode 'query=electric cars' \
+  --data-urlencode 'count=10' \
+  --header 'x-cognifyapi-key: YOUR_COGNIFY_API_KEY'
 ```
-
-**Example Response (Node.js/Axios):**
-```json
-{
-    "status": "success",
-    "query": "SpaceX",
-    "results": 2,
-    "images": [
-        {
-            "url": "https://example.com/image.jpg",
-        },
-        {
-            "url": "https://example.com/image.jpg",
-        }
-    ]
-}
-```
-
-
